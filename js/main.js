@@ -1,5 +1,8 @@
 let score = 0;
 let color = "blue";
+let nameInput = document.getElementById('name');
+let submitButton = document.getElementById('submit');
+let li = document.getElementById('scoreList');
 
 function random(min, max) {
     return Math.round(Math.random() * (max - min) + min);
@@ -61,10 +64,11 @@ $(document).on('click', '.box', function () {
 
     $(".score").html(score);
     $(this).remove();
+
 });
 
 let runGame = setInterval(function () {
-    for (i = 0;  i<10; i++) {
+    for (i = 0; i < 10; i++) {
         dropBox();
     }
 }, 5000);
@@ -88,3 +92,35 @@ function countdown() {
 }
 
 countdown();
+
+
+function submitScore() {
+    let data = {
+        name: nameInput.value,
+        score: score
+    }
+    database = firebase.database();
+    let ref = database.ref('scores');
+    ref.push(data);
+    ref.on('value', getData, errData);
+}
+
+function getData(data) {
+
+    const scores = data.val();
+    const keys = Object.keys(scores);
+
+    for (let i = 0; i < keys.length; i++) {
+        let k = keys[i];
+
+        li.innerHTML = `Score : <li>${scores[k].name + "  :  " + scores[k].score}</li>`;
+    }
+}
+
+function errData(err) {
+    console.log('Error!');
+}
+
+submitButton.addEventListener("click", function (e) {
+    submitScore();
+})

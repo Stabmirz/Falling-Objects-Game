@@ -7,6 +7,7 @@ body{
     background: url(../images/background.jpg) no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    position: relative;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -49,4 +50,25 @@ body{
     font-size: 30px;
     position: relative;
     z-index: 1;
+}
+
+#name{
+    background-color: #fbff05c5;
+    border: 1px solid rgb(24, 9, 236);
+    height: 4vh;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 5vw;
+}
+
+#submit{
+    background-color: black;
+    color: white;
+    font-size: 14px;
+}
+
+#scoreList{
+    color:white;
+    font-size: 24px;
+    margin-left: 5vw;
 }
