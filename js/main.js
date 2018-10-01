@@ -2,7 +2,7 @@ let score = 0;
 let color = "blue";
 let nameInput = document.getElementById('name');
 let submitButton = document.getElementById('submit');
-let li = document.getElementById('scoreList');
+// let li = document.getElementById('scoreList');
 
 function random(min, max) {
     return Math.round(Math.random() * (max - min) + min);
@@ -99,21 +99,37 @@ function submitScore() {
         name: nameInput.value,
         score: score
     }
-    database = firebase.database();
-    let ref = database.ref('scores');
     ref.push(data);
-    ref.on('value', getData, errData);
 }
+database = firebase.database();
+let ref = database.ref('scores');
+ref.on('value', getData, errData);
+
 
 function getData(data) {
+    let scorelistings = document.querySelectorAll('.scorelisting');
+
+    for (var i = 0; i < scorelistings.length; i++){
+        scorelistings[i].remove();
+    }
 
     const scores = data.val();
     const keys = Object.keys(scores);
+    const olList = document.getElementById('scoreList');
 
     for (let i = 0; i < keys.length; i++) {
         let k = keys[i];
+        let name = scores[k].name;
+        let score = scores[k].score;
 
-        li.innerHTML = `Score : <li>${scores[k].name + "  :  " + scores[k].score}</li>`;
+        var li = document.createElement('li');
+        li.classList.add('scorelisting');
+
+        $(olList).append(li);
+        var scoreArr = $('ol').find('li');
+        var count = $("ol").find("li").length;
+ 
+        li.innerText = name + ": " + score;
     }
 }
 

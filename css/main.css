@@ -21,6 +21,7 @@ body{
     user-select: none;
     width: 100%;
     text-align: center;
+    position: fixed;
 }
    
 .box {
@@ -67,8 +68,24 @@ body{
     font-size: 14px;
 }
 
+.scoreBoard{
+    float: right;
+    
+}
+
 #scoreList{
-    color:white;
-    font-size: 24px;
-    margin-left: 5vw;
+    background: url('../images/scoreBoard.jpg') no-repeat;
+    font-size: 18px;
+    color: white;
+    background-color: #022a39;
+    position: relative;
+    margin-right: 1vw;
+    border: 1px solid white;
+}
+
+p{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 1vw;
 }
